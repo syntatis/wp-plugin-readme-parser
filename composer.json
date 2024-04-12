@@ -1,0 +1,63 @@
+{
+	"name": "syntatis/wp-plugin-readme-parser",
+	"description": "WordPress plugin readme parser",
+	"keywords": [
+		"wordpress",
+		"readme",
+		"plugin",
+    "parser"
+	],
+	"homepage": "https://github.com/syntatis/wp-plugin-readme-parser",
+	"license": "GPL-3.0-or-later",
+	"authors": [
+		{
+			"name": "Thoriq Firdaus",
+			"homepage": "https://github.com/tfirdaus",
+			"role": "Developer"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Syntatis\\WP\\PluginReadMeParser\\": "app/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Syntatis\\WP\\PluginReadMeParser\\Tests\\": "tests/"
+		}
+	},
+	"require": {
+		"php": ">=7.2"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"phpcompatibility/php-compatibility": "^9.3",
+		"rector/rector": "^1.0",
+		"symfony/var-dumper": "^5.4",
+		"syntatis/coding-standard": "^1.0"
+	},
+	"scripts": {
+		"phpcs:fix": "vendor/bin/phpcbf",
+		"phpcs": "vendor/bin/phpcs",
+		"phpunit:coverage": "vendor/bin/phpunit",
+		"phpunit": "vendor/bin/phpunit --no-coverage",
+		"test": [
+			"@phpcs",
+			"@phpunit"
+		],
+		"update-parser-class": [
+			"@php bin/update-parser-class",
+			"vendor/bin/rector",
+			"@phpcs:fix"
+		]
+	},
+	"config": {
+		"sort-packages": true,
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"phpstan/extension-installer": true
+		}
+	},
+	"prefer-stable": true,
+	"minimum-stability": "stable"
+}

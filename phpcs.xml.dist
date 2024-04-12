@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<ruleset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd"
+	name="PHP Coding Standard">
+	<description>PHP Coding Standard</description>
+
+	<arg name="basepath" value="."/>
+	<arg name="parallel" value="80"/>
+
+	<!-- Ignore warnings, show progress of the run and show sniff names -->
+	<arg value="nps"/>
+
+	<!-- The directories to apply the rules -->
+	<file>./app/</file>
+
+	<!-- Show the warning but exit with 0. The Warning is fine -->
+	<config name="ignore_warnings_on_exit" value="1"/>
+
+	<!-- Check for cross-version support for PHP 7.2 or higher. Requires PHPCompatibility -->
+	<config name="testVersion" value="7.2-"/>
+
+	<!-- Include full Doctrine Coding Standard -->
+	<rule ref="Syntatis"/>
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<properties>
+			<property name="rootNamespaces" type="array">
+				<element key="app" value="Syntatis\WP\PluginReadMeParser"/>
+				<element key="tests" value="Syntatis\WP\PluginReadMeParser\Tests"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Enable PHPCompatibility ruleset to enable version compatibility test -->
+	<rule ref="PHPCompatibility"/>
+
+	<!-- Disable some rules as the source is pulled from upstream -->
+	<rule ref="PSR1.Methods.CamelCapsMethodName">
+	  	<exclude name="PSR1.Methods.CamelCapsMethodName.NotCamelCaps"/>
+	</rule>
+	<rule ref="Generic.PHP.ForbiddenFunctions">
+	  	<exclude name="Generic.PHP.ForbiddenFunctions.Found"/>
+	</rule>
+	<rule ref="Squiz.NamingConventions.ValidVariableName">
+	  	<exclude name="Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps"/>
+	  	<exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps"/>
+	</rule>
+	<rule ref="Squiz.Strings.DoubleQuoteUsage">
+	  	<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+	</rule>
+	<rule ref="Squiz.NamingConventions.ValidVariableName">
+	  	<exclude name="Squiz.NamingConventions.ValidVariableName.StringNotCamelCaps"/>
+	</rule>
+	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
+	  	<exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint"/>
+	</rule>
+	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint">
+	  	<exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingTraversableTypeHintSpecification"/>
+	</rule>
+	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
+	  	<exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingTraversableTypeHintSpecification"/>
+	</rule>
+	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
+	  	<exclude name="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingTraversableTypeHintSpecification"/>
+	</rule>
+	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint">
+	  	<exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint"/>
+	</rule>
+	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint">
+	  	<exclude name="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint"/>
+	</rule>
+	<rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceEqualOperator">
+	  	<exclude name="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceEqualOperator.RequiredNullCoalesceEqualOperator"/>
+	</rule>
+	<rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition">
+	  	<exclude name="SlevomatCodingStandard.ControlStructures.AssignmentInCondition.AssignmentInCondition"/>
+	</rule>
+
+	<exclude-pattern>/cache/</exclude-pattern>
+	<exclude-pattern>/tests/intelephense-alias.php</exclude-pattern>
+</ruleset>
