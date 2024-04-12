@@ -19,7 +19,7 @@ jobs:
       - name: Set up PHP environment
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.2'
+          php-version: '7.4'
           tools: composer:v2
 
       - name: Get composer cache directory
