@@ -7,7 +7,6 @@ namespace Syntatis\WP\PluginReadMeParser;
 use Michelf\MarkdownExtra;
 
 use function array_flip;
-use function class_exists;
 use function get_html_translation_table;
 use function preg_replace;
 use function preg_replace_callback;
@@ -16,10 +15,6 @@ use function strtr;
 use function trim;
 
 use const HTML_ENTITIES;
-
-if (! class_exists('\Michelf\MarkdownExtra')) {
-	include __DIR__ . '/libs/michelf-php-markdown-1.6.0/Michelf/MarkdownExtra.inc.php';
-}
 
 /**
  * WordPress.org Plugin Readme Parser Markdown.

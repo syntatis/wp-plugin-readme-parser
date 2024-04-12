@@ -24,7 +24,11 @@ $content = str_replace(
 	'namespace Syntatis\WP\PluginReadMeParser',
 	$content
 );
-$content = preg_replace('/if\s*\(\s*!\s*class_exists\s*\(\s*[\'\\\\]Michelf\\\\MarkdownExtra[\'\\\\]\s*\)\s*\)\s*{\s*include\s*__DIR__\s*\.\s*\'\/libs\/michelf-php-markdown-1\.6\.0\/Michelf\/MarkdownExtra\.inc\.php\'\s*;\s*}/', '', $content);
+$content = preg_replace(
+	'/if\s*\(\s*!\s*class_exists\s*\(\s*\'\\\Michelf\\\MarkdownExtra\'\s*\)\s*\)\s*{\s*include\s*__DIR__\s*\.\s*\'\/libs\/michelf-php-markdown-1\.6\.0\/Michelf\/MarkdownExtra\.inc\.php\'\s*;\s*}/',
+	'',
+	$content
+);
 
 
 if ( ! $content ) {
