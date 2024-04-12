@@ -1,6 +1,6 @@
 {
 	"name": "syntatis/wp-plugin-readme-parser",
-	"description": "WordPress plugin readme parser",
+	"description": "A parser for retrieving information from WordPress plugin readme files",
 	"keywords": [
 		"wordpress",
 		"readme",
@@ -46,13 +46,13 @@
 			"@phpcs",
 			"@phpunit"
 		],
-		"update-parser-class": [
-			"@php bin/update-parser-class",
+		"sync-parser-class": [
+			"@php bin/sync-parser-class",
 			"vendor/bin/rector",
 			"@phpcs:fix"
 		],
-		"update-markdown-class": [
-			"@php bin/update-markdown-class",
+		"sync-markdown-class": [
+			"@php bin/sync-markdown-class",
 			"vendor/bin/rector",
 			"@phpcs:fix"
 		]
