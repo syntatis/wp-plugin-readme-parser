@@ -1,0 +1,40 @@
+#!/usr/bin/php
+
+<?php
+
+$context = stream_context_create(
+	[
+		'ssl'  => [
+			'verify_peer'      => false,
+			'verify_peer_name' => false,
+		],
+		'http' => [
+			'user_agent' => 'Syntatis (wp-plugin-readme-parser)',
+		],
+	]
+);
+
+$content = file_get_contents(
+    'https://raw.githubusercontent.com/WordPress/wordpress.org/trunk/wordpress.org/public_html/wp-content/plugins/plugin-directory/class-markdown.php',
+    false,
+    $context
+);
+$content = str_replace(
+	'namespace WordPressdotorg\Plugin_Directory',
+	'namespace Syntatis\WP\PluginReadMeParser',
+	$content
+);
+$content = preg_replace('/if\s*\(\s*!\s*class_exists\s*\(\s*[\'\\\\]Michelf\\\\MarkdownExtra[\'\\\\]\s*\)\s*\)\s*{\s*include\s*__DIR__\s*\.\s*\'\/libs\/michelf-php-markdown-1\.6\.0\/Michelf\/MarkdownExtra\.inc\.php\'\s*;\s*}/', '', $content);
+
+
+if ( ! $content ) {
+    echo "Failed to fetch 'class-markdown.php' from WordPress.org\n";
+	exit( 1 );
+}
+
+if ( ! file_put_contents( dirname( __DIR__ ) . '/app/Markdown.php', $content ) ) {
+	echo "Failed to update '/app/Markdown.php'\n";
+    exit( 1 );
+} else {
+	echo "Updated '/app/Markdown.php'\n";
+}

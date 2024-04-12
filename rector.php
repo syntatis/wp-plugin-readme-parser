@@ -8,6 +8,7 @@ use Rector\Set\ValueObject\DowngradeLevelSetList;
 
 return static function (RectorConfig $rectorConfig): void {
 	$rectorConfig->parallel();
+	$rectorConfig->importNames();
     $rectorConfig->paths([__DIR__ . '/app']);
     $rectorConfig->sets([
 		DowngradeLevelSetList::DOWN_TO_PHP_72,

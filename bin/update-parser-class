@@ -14,23 +14,23 @@ $context = stream_context_create(
 	]
 );
 
-$content_parser = file_get_contents(
-    'https://meta.trac.wordpress.org/browser/sites/trunk/wordpress.org/public_html/wp-content/plugins/plugin-directory/readme/class-parser.php?format=txt',
+$content = file_get_contents(
+    'https://raw.githubusercontent.com/WordPress/wordpress.org/trunk/wordpress.org/public_html/wp-content/plugins/plugin-directory/readme/class-parser.php',
     false,
     $context
 );
-$content_parser = str_replace(
+$content = str_replace(
 	'namespace WordPressdotorg\Plugin_Directory\Readme',
-	'namespace Syntatis\WP\PluginReadMeParser\Parser',
-	$content_parser
+	'namespace Syntatis\WP\PluginReadMeParser',
+	$content
 );
 
-if ( ! $content_parser ) {
+if ( ! $content ) {
     echo "Failed to fetch 'class-parser.php' from WordPress.org\n";
 	exit( 1 );
 }
 
-if ( ! file_put_contents( dirname( __DIR__ ) . '/app/Parser.php', $content_parser ) ) {
+if ( ! file_put_contents( dirname( __DIR__ ) . '/app/Parser.php', $content ) ) {
 	echo "Failed to update '/app/Parser.php'\n";
     exit( 1 );
 } else {

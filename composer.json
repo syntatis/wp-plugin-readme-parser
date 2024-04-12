@@ -27,7 +27,8 @@
 		}
 	},
 	"require": {
-		"php": ">=7.2"
+		"php": ">=7.2",
+		"michelf/php-markdown": "1.6"
 	},
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
@@ -47,6 +48,11 @@
 		],
 		"update-parser-class": [
 			"@php bin/update-parser-class",
+			"vendor/bin/rector",
+			"@phpcs:fix"
+		],
+		"update-markdown-class": [
+			"@php bin/update-markdown-class",
 			"vendor/bin/rector",
 			"@phpcs:fix"
 		]
