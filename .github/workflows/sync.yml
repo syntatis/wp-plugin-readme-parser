@@ -10,7 +10,6 @@ on:
 
 jobs:
   sync:
-    name: Sync files
     runs-on: ubuntu-latest
     steps:
       - name: Check out source code
