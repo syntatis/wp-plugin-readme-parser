@@ -305,7 +305,7 @@ class Parser
 				break;
 			}
 
-			[$key, $value] = $header;
+			list($key, $value) = $header;
 
 			if (isset($this->valid_headers[$key])) {
 				$headers[$this->valid_headers[$key]] = $value;
@@ -640,7 +640,7 @@ class Parser
 			return false;
 		}
 
-		[$key, $value] = explode(':', $line, 2);
+		list($key, $value) = explode(':', $line, 2);
 		$key                 = strtolower(trim($key, " \t*-\r\n"));
 		$value               = trim($value, " \t*-\r\n");
 
@@ -808,7 +808,7 @@ class Parser
 			$version = trim(str_ireplace($strip_phrases, '', $version));
 
 			// Strip off any -alpha, -RC, -beta suffixes, as these complicate comparisons and are rarely used.
-			[$version] = explode('-', $version);
+			list($version) = explode('-', $version);
 
 			if (
 				// x.y or x.y.z
@@ -850,7 +850,7 @@ class Parser
 			$version = trim(str_ireplace($strip_phrases, '', $version));
 
 			// Strip off any -alpha, -RC, -beta suffixes, as these complicate comparisons and are rarely used.
-			[$version] = explode('-', $version);
+			list($version) = explode('-', $version);
 
 			if (
 				// x.y or x.y.z
