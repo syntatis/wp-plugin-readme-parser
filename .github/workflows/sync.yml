@@ -2,9 +2,6 @@ name: sync
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
   schedule:
     - cron:  '0 */12 * * *'
 
@@ -46,9 +43,9 @@ jobs:
       - name: Create a Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: Sync $TODAY
+          commit-message: Sync classes ($TODAY)
           branch: sync
           delete-branch: true
-          title: Sync $TODAY
+          title: Sync classes ($TODAY)
           body: |
             Sync classes from WordPress.org repository.
