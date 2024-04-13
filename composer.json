@@ -2,9 +2,10 @@
 	"name": "syntatis/wp-plugin-readme-parser",
 	"description": "A parser for retrieving information from WordPress plugin readme files",
 	"keywords": [
-		"wordpress",
-		"readme",
+		"markdown",
 		"plugin",
+		"readme",
+		"wordpress",
     "parser"
 	],
 	"homepage": "https://github.com/syntatis/wp-plugin-readme-parser",
