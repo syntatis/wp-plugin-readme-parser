@@ -4,7 +4,8 @@
   <p>A parser for retrieving information from WordPress plugin readme files</p>
   </div>
 
-  [![test](https://github.com/syntatis/wp-plugin-readme-parser/actions/workflows/test.yml/badge.svg)](https://github.com/syntatis/wp-plugin-readme-parser/actions/workflows/test.yml)
+  ![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/syntatis/wp-plugin-readme-parser/php)
+ [![test](https://github.com/syntatis/wp-plugin-readme-parser/actions/workflows/test.yml/badge.svg)](https://github.com/syntatis/wp-plugin-readme-parser/actions/workflows/test.yml)
 </div>
 
 ---
