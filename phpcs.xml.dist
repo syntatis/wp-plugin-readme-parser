@@ -75,6 +75,13 @@
 	<rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition">
 	  	<exclude name="SlevomatCodingStandard.ControlStructures.AssignmentInCondition.AssignmentInCondition"/>
 	</rule>
+	<rule ref="SlevomatCodingStandard.PHP">
+	  	<exclude name="SlevomatCodingStandard.PHP.ShortList"/>
+	</rule>
+	<rule ref="SlevomatCodingStandard.PHP.DisallowReference">
+	  	<exclude name="SlevomatCodingStandard.PHP.DisallowReference.DisallowedPassingByReference"/>
+	  	<exclude name="SlevomatCodingStandard.PHP.DisallowReference.DisallowedAssigningByReference"/>
+	</rule>
 
 	<exclude-pattern>/cache/</exclude-pattern>
 	<exclude-pattern>/tests/intelephense-alias.php</exclude-pattern>
