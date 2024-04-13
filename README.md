@@ -9,4 +9,4 @@
 
 ---
 
-This package may be used to parse the `readme.txt` or `readme.md` file of a WordPress plugin to extract metadata about the plugin, such as the plugin name, required PHP version, tested, and description. It is derived directly from the WordPress.org's readme parser, but with a few modifications to make it compatible with a wider range of PHP versions.
+This package may be used to parse the `readme.txt` or `readme.md` file of a WordPress plugin to extract metadata about the plugin, such as the plugin name, required PHP version, tested, and description. It is derived directly from [the WordPress.org's readme parser](https://github.com/WordPress/wordpress.org/tree/trunk/wordpress.org/public_html/wp-content/plugins/plugin-directory), but with a few modifications to make it compatible with a wider range of PHP versions.
