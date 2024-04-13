@@ -32,6 +32,24 @@ jobs:
       matrix:
         php: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
 
+    env:
+      WP_DB_TEST_NAME: wp_test
+      WP_DB_TEST_PASS: wp_test
+      WP_DB_TEST_USER: wp_test
+      PHP_EXTENSIONS: mysqli
+
+    services:
+      database:
+        image: 'mariadb:10.11.5'
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: ${{ env.WP_DB_TEST_NAME }}
+          MYSQL_USER: ${{ env.WP_DB_TEST_USER }}
+          MYSQL_PASSWORD: ${{ env.WP_DB_TEST_PASS }}
+        ports:
+          - 3306:3306
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -61,5 +79,8 @@ jobs:
           composer install --prefer-dist
 
       - name: Run test
+        env:
+          WP_DB_TEST_HOST: 127.0.0.1:${{ job.services.database.ports['3306'] }}
+          WP_ENVIRONMENT_TYPE: development
         run: |
           vendor/bin/phpunit
