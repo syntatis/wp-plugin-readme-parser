@@ -37,15 +37,12 @@ jobs:
           composer sync-parser-class
           composer sync-markdown-class
 
-      - name: Set current date as env variable
-        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-
       - name: Create a Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: Sync classes ($TODAY)
+          commit-message: Sync classes
           branch: sync
           delete-branch: true
-          title: Sync classes ($TODAY)
+          title: Sync classes
           body: |
             Sync classes from WordPress.org repository.
