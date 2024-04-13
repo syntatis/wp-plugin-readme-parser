@@ -28,7 +28,7 @@
 	},
 	"require": {
 		"php": ">=7.0",
-		"michelf/php-markdown": "1.6"
+		"michelf/php-markdown": "^1.0 || ^2.0"
 	},
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
