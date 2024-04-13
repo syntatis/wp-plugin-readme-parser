@@ -11,7 +11,7 @@ return static function (RectorConfig $rectorConfig): void {
 	$rectorConfig->importNames();
     $rectorConfig->paths([__DIR__ . '/app']);
     $rectorConfig->sets([
-		DowngradeLevelSetList::DOWN_TO_PHP_72,
+		DowngradeLevelSetList::DOWN_TO_PHP_70,
     ]);
 	$rectorConfig->ruleWithConfiguration(RenameClassRector::class, [
 		'WordPressdotorg\Plugin_Directory\Markdown' => 'Syntatis\WP\PluginReadMeParser\Markdown',
