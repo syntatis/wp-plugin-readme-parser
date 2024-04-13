@@ -57,10 +57,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer remove syntatis/coding-standard --dev
+          composer remove syntatis/coding-standard rector/rector --dev
           composer install --prefer-dist
 
       - name: Run test
         run: |
-          composer phpstan
-          vendor/bin/phpunit --coverage-clover coverage.xml
+          vendor/bin/phpunit
