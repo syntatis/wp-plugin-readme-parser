@@ -132,8 +132,8 @@ class Parser
 	 */
 	public $alias_sections = [
 		'frequently_asked_questions' => 'faq',
-		'change_log'                 => 'changelog',
-		'screenshot'                 => 'screenshots',
+		'change_log' => 'changelog',
+		'screenshot' => 'screenshots',
 	];
 
 	/**
@@ -142,17 +142,17 @@ class Parser
 	 * @var array
 	 */
 	public $valid_headers = [
-		'tested'            => 'tested',
-		'tested up to'      => 'tested',
-		'requires'          => 'requires',
+		'tested' => 'tested',
+		'tested up to' => 'tested',
+		'requires' => 'requires',
 		'requires at least' => 'requires',
-		'requires php'      => 'requires_php',
-		'tags'              => 'tags',
-		'contributors'      => 'contributors',
-		'donate link'       => 'donate_link',
-		'stable tag'        => 'stable_tag',
-		'license'           => 'license',
-		'license uri'       => 'license_uri',
+		'requires php' => 'requires_php',
+		'tags' => 'tags',
+		'contributors' => 'contributors',
+		'donate link' => 'donate_link',
+		'stable tag' => 'stable_tag',
+		'license' => 'license',
+		'license uri' => 'license_uri',
 	];
 
 	/**
@@ -172,9 +172,9 @@ class Parser
 	 */
 	public $maximum_field_lengths = [
 		'short_description' => 150,
-		'section'           => 2500,
+		'section' => 2500,
 		'section-changelog' => 5000,
-		'section-faq'       => 5000,
+		'section-faq' => 5000,
 	];
 
 	/**
@@ -252,7 +252,7 @@ class Parser
 			}
 		}
 
-		$line       = $this->get_first_nonwhitespace($contents);
+		$line = $this->get_first_nonwhitespace($contents);
 		$this->name = $this->sanitize_text(trim($line, "#= \t\0\x0B"));
 
 		// It's possible to leave the plugin name header off entirely..
@@ -260,7 +260,7 @@ class Parser
 			array_unshift($contents, $line);
 
 			$this->warnings['invalid_plugin_name_header'] = true;
-			$this->name                                   = false;
+			$this->name = false;
 		}
 
 		// Strip Github style header\n==== underlines.
@@ -273,7 +273,7 @@ class Parser
 			$this->warnings['invalid_plugin_name_header'] = true;
 
 			$this->name = false;
-			$line       = $this->get_first_nonwhitespace($contents);
+			$line = $this->get_first_nonwhitespace($contents);
 
 			// Ensure that the line read doesn't look like a description.
 			if (strlen($line) < 50 && ! $this->parse_possible_header($line, true /* only valid headers */)) {
@@ -287,10 +287,10 @@ class Parser
 		// Parse headers.
 		$headers = [];
 
-		$line                = $this->get_first_nonwhitespace($contents);
+		$line = $this->get_first_nonwhitespace($contents);
 		$last_line_was_blank = false;
 		do {
-			$value  = null;
+			$value = null;
 			$header = $this->parse_possible_header($line);
 
 			// If it doesn't look like a header value, maybe break to the next section.
@@ -366,7 +366,7 @@ class Parser
 			// Handle the many cases of "License: GPLv2 - http://..."
 			if (empty($headers['license_uri']) && preg_match('!(https?://\S+)!i', $headers['license'], $url)) {
 				$headers['license_uri'] = $url[1];
-				$headers['license']     = trim(str_replace($url[1], '', $headers['license']), " -*\t\n\r\n");
+				$headers['license'] = trim(str_replace($url[1], '', $headers['license']), " -*\t\n\r\n");
 			}
 
 			$this->license = $headers['license'];
@@ -403,7 +403,7 @@ class Parser
 		 * Pre-fill the sections, we'll filter out empty sections later.
 		 */
 		$this->sections = array_fill_keys($this->expected_sections, '');
-		$current        = $section_name = $section_title = '';
+		$current = $section_name = $section_title = '';
 		while (( $line = array_shift($contents) ) !== null) {
 			$trimmed = trim($line);
 			if (empty($trimmed)) {
@@ -420,9 +420,9 @@ class Parser
 					$this->sections[$section_name] .= trim($current);
 				}
 
-				$current       = '';
+				$current = '';
 				$section_title = trim($line, "#= \t");
-				$section_name  = strtolower(str_replace(' ', '_', $section_title));
+				$section_name = strtolower(str_replace(' ', '_', $section_title));
 
 				if (isset($this->alias_sections[$section_name])) {
 					$section_name = $this->alias_sections[$section_name];
@@ -430,7 +430,7 @@ class Parser
 
 				// If we encounter an unknown section header, include the provided Title, we'll filter it to other_notes later.
 				if (! in_array($section_name, $this->expected_sections)) {
-					$current     .= '<h3>' . $section_title . '</h3>';
+					$current .= '<h3>' . $section_title . '</h3>';
 					$section_name = 'other_notes';
 				}
 
@@ -482,14 +482,14 @@ class Parser
 
 		// Display FAQs as a definition list.
 		if (isset($this->sections['faq'])) {
-			$this->faq             = $this->parse_section($this->sections['faq']);
+			$this->faq = $this->parse_section($this->sections['faq']);
 			$this->sections['faq'] = '';
 		}
 
 		// Markdownify!
-		$this->sections       = array_map([$this, 'parse_markdown'], $this->sections);
+		$this->sections = array_map([$this, 'parse_markdown'], $this->sections);
 		$this->upgrade_notice = array_map([$this, 'parse_markdown'], $this->upgrade_notice);
-		$this->faq            = array_map([$this, 'parse_markdown'], $this->faq);
+		$this->faq = array_map([$this, 'parse_markdown'], $this->faq);
 
 		// Use the first line of the description for the short description if not provided.
 		if (! $this->short_description && ! empty($this->sections['description'])) {
@@ -501,7 +501,7 @@ class Parser
 		$this->short_description = $this->sanitize_text($this->short_description);
 		$this->short_description = $this->parse_markdown($this->short_description);
 		$this->short_description = wp_strip_all_tags($this->short_description);
-		$short_description       = $this->trim_length($this->short_description, 'short_description');
+		$short_description = $this->trim_length($this->short_description, 'short_description');
 		if ($short_description !== $this->short_description) {
 			if (empty($this->warnings['no_short_description_present'])) {
 				$this->warnings['trimmed_short_description'] = true;
@@ -532,7 +532,7 @@ class Parser
 			if ($this->faq) {
 				$this->sections['faq'] .= "\n<dl>\n";
 				foreach ($this->faq as $question => $answer) {
-					$question_slug          = rawurlencode(trim(strtolower($question)));
+					$question_slug = rawurlencode(trim(strtolower($question)));
 					$this->sections['faq'] .= "<dt id='{$question_slug}'><h3>{$question}</h3></dt>\n<dd>{$answer}</dd>\n";
 				}
 
@@ -577,8 +577,8 @@ class Parser
 
 	/**
 	 * @param string $desc
-	 * @param int    $length
-	 * @param string $type   The type of the length, 'char' or 'words'.
+	 * @param int $length
+	 * @param string $type The type of the length, 'char' or 'words'.
 	 * @return string
 	 *
 	 * @access protected
@@ -628,8 +628,8 @@ class Parser
 	/**
 	 * Parse a line to see if it's a header.
 	 *
-	 * @param string $line       The line from the readme to parse.
-	 * @param bool   $only_valid Whether to only return a valid known header.
+	 * @param string $line The line from the readme to parse.
+	 * @param bool $only_valid Whether to only return a valid known header.
 	 * @return false|array
 	 *
 	 * @access protected
@@ -641,8 +641,8 @@ class Parser
 		}
 
 		list( $key, $value ) = explode(':', $line, 2);
-		$key                 = strtolower(trim($key, " \t*-\r\n"));
-		$value               = trim($value, " \t*-\r\n");
+		$key = strtolower(trim($key, " \t*-\r\n"));
+		$value = trim($value, " \t*-\r\n");
 
 		if ($only_valid && ! isset($this->valid_headers[$key])) {
 			return false;
@@ -662,26 +662,26 @@ class Parser
 		$text = trim($text);
 
 		$allowed = [
-			'a'          => [
-				'href'  => true,
+			'a' => [
+				'href' => true,
 				'title' => true,
-				'rel'   => true,
+				'rel' => true,
 			],
 			'blockquote' => ['cite' => true],
-			'br'         => [],
-			'p'          => [],
-			'code'       => [],
-			'pre'        => [],
-			'em'         => [],
-			'strong'     => [],
-			'ul'         => [],
-			'ol'         => [],
-			'dl'         => [],
-			'dt'         => ['id' => true],
-			'dd'         => [],
-			'li'         => [],
-			'h3'         => [],
-			'h4'         => [],
+			'br' => [],
+			'p' => [],
+			'code' => [],
+			'pre' => [],
+			'em' => [],
+			'strong' => [],
+			'ul' => [],
+			'ol' => [],
+			'dl' => [],
+			'dt' => ['id' => true],
+			'dd' => [],
+			'li' => [],
+			'h3' => [],
+			'h4' => [],
 		];
 
 		$text = force_balance_tags($text);
@@ -878,7 +878,7 @@ class Parser
 	 */
 	protected function parse_section($lines)
 	{
-		$key    = $value = '';
+		$key = $value = '';
 		$return = [];
 
 		if (! is_array($lines)) {
@@ -902,7 +902,7 @@ class Parser
 
 		$line_count = count($lines);
 		for ($i = 0; $i < $line_count; $i++) {
-			$line    = &$lines[$i];
+			$line = &$lines[$i];
 			$trimmed = &$trimmed_lines[$i];
 			if (! $trimmed) {
 				$value .= "\n";

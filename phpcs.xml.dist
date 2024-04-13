@@ -22,6 +22,7 @@
 
 	<!-- Include full Doctrine Coding Standard -->
 	<rule ref="Syntatis"/>
+	<rule ref="SlevomatCodingStandard.Whitespaces.DuplicateSpaces"/>
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
@@ -47,6 +48,10 @@
 	</rule>
 	<rule ref="Squiz.Strings.DoubleQuoteUsage">
 	  	<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar"/>
+	</rule>
+	<rule ref="Squiz.Commenting.FunctionComment">
+	  	<exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
+	  	<exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamName"/>
 	</rule>
 	<rule ref="Squiz.NamingConventions.ValidVariableName">
 	  	<exclude name="Squiz.NamingConventions.ValidVariableName.StringNotCamelCaps"/>
