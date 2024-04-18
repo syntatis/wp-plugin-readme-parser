@@ -22,3 +22,7 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    ignore:
+      - dependency-name: "phpunit/phpunit"
+      - dependency-name: "michelf/php-markdown"
+      - dependency-name: "rector/rector"
