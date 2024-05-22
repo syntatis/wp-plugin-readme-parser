@@ -19,12 +19,12 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Syntatis\\WP\\PluginReadMeParser\\": "app/"
+			"Syntatis\\WPPluginReadMeParser\\": "app/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Syntatis\\WP\\PluginReadMeParser\\Tests\\": "tests/"
+			"Syntatis\\WPPluginReadMeParser\\Tests\\": "tests/"
 		}
 	},
 	"require": {

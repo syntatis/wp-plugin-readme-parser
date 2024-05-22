@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Syntatis\WP\PluginReadMeParser\Tests;
+namespace Syntatis\WPPluginReadMeParser\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Syntatis\WP\PluginReadMeParser\Parser;
+use Syntatis\WPPluginReadMeParser\Parser;
 
 use function gettype;
 

@@ -14,14 +14,14 @@ return static function (RectorConfig $rectorConfig): void {
 		DowngradeLevelSetList::DOWN_TO_PHP_70,
     ]);
 	$rectorConfig->ruleWithConfiguration(RenameClassRector::class, [
-		'WordPressdotorg\Plugin_Directory\Markdown' => 'Syntatis\WP\PluginReadMeParser\Markdown',
+		'WordPressdotorg\Plugin_Directory\Markdown' => 'Syntatis\WPPluginReadMeParser\Markdown',
 	]);
 	$rectorConfig->ruleWithConfiguration(FunctionArgumentDefaultValueReplacerRector::class, [
 		new ReplaceFuncCallArgumentDefaultValue(
 			'class_exists',
 			0,
 			'\WordPressdotorg\Plugin_Directory\Markdown',
-			'\Syntatis\WP\PluginReadMeParser\Markdown'
+			'\Syntatis\WPPluginReadMeParser\Markdown'
 		),
 	]);
 };

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syntatis\WP\PluginReadMeParser;
+namespace Syntatis\WPPluginReadMeParser;
 
 use function array_diff;
 use function array_fill_keys;

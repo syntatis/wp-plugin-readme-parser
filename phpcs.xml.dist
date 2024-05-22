@@ -26,8 +26,8 @@
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
-				<element key="app" value="Syntatis\WP\PluginReadMeParser"/>
-				<element key="tests" value="Syntatis\WP\PluginReadMeParser\Tests"/>
+				<element key="app" value="Syntatis\WPPluginReadMeParser"/>
+				<element key="tests" value="Syntatis\WPPluginReadMeParser\Tests"/>
 			</property>
 		</properties>
 	</rule>
