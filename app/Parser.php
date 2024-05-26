@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Syntatis\WPPluginReadMeParser;
+namespace Syntatis\WP\PluginReadMeParser;
+
+use Syntatis\WPPluginReadMeParser\Markdown;
 
 use function array_diff;
 use function array_fill_keys;
@@ -963,7 +965,7 @@ class Parser
 		static $markdown = null;
 
 		// Return early if the Markdown processor isn't available.
-		if (! class_exists('\Syntatis\WP\PluginReadMeParser\Markdown')) {
+		if (! class_exists('\Syntatis\WPPluginReadMeParser\Markdown')) {
 			return $text;
 		}
 
