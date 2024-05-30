@@ -963,7 +963,7 @@ class Parser
 		static $markdown = null;
 
 		// Return early if the Markdown processor isn't available.
-		if (! class_exists('\Syntatis\WP\PluginReadMeParser\Markdown')) {
+		if (! class_exists('\Syntatis\WPPluginReadMeParser\Markdown')) {
 			return $text;
 		}
 
