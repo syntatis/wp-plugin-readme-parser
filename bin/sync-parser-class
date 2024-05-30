@@ -21,7 +21,7 @@ $content = file_get_contents(
 );
 $content = str_replace(
 	'namespace WordPressdotorg\Plugin_Directory\Readme',
-	'namespace Syntatis\WP\PluginReadMeParser',
+	'namespace Syntatis\WPPluginReadMeParser',
 	$content
 );
 
