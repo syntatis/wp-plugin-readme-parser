@@ -6,9 +6,11 @@ on:
     types: [opened, reopened, synchronize]
     branches:
       - main
+      - sync
     paths:
-      - ".github/workflows/test.yml"
+      - ".github/workflows/ci.yml"
       - "**.php"
+      - "bin/*"
       - "composer.json"
       - "phpcs.xml.dist"
       - "phpunit.xml.dist"
