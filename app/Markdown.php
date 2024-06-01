@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Syntatis\WPPluginReadMeParser;
+namespace Syntatis\WP\PluginReadMeParser;
 
 use Michelf\MarkdownExtra;
 
