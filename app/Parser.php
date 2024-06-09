@@ -392,7 +392,6 @@ class Parser
 		while (( $line = array_shift($contents) ) !== null) {
 			$trimmed = trim($line);
 			if (empty($trimmed)) {
-				$this->short_description .= "\n";
 				continue;
 			}
 
@@ -405,7 +404,7 @@ class Parser
 				break;
 			}
 
-			$this->short_description .= $line . "\n";
+			$this->short_description .= $line . ' ';
 		}
 
 		$this->short_description = trim($this->short_description);
