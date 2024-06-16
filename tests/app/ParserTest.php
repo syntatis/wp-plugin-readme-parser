@@ -18,11 +18,11 @@ class ParserTest extends TestCase
 	 * @return void
 	 */
 	public function testRetrievingTested() {
-		$parser = new Parser(__DIR__ . '/fixtures/readme.txt');
+		$parser = new Parser(dirname(__DIR__) . '/fixtures/readme.txt');
 
 		$this->assertEquals('5.4', $parser->tested);
 
-		$parser = new Parser(__DIR__ . '/fixtures/readme-alt1.txt');
+		$parser = new Parser(dirname(__DIR__) . '/fixtures/readme-alt1.txt');
 
 		$this->assertEquals('5.0', $parser->tested);
 	}
@@ -33,11 +33,11 @@ class ParserTest extends TestCase
 	 * @return void
 	 */
 	public function testRetrievingTestedMarkdown() {
-		$parser = new Parser(__DIR__ . '/fixtures/readme.md');
+		$parser = new Parser(dirname(__DIR__) . '/fixtures/readme.md');
 
 		$this->assertEquals('3.0', $parser->tested);
 
-		$parser = new Parser(__DIR__ . '/fixtures/readme-alt1.md');
+		$parser = new Parser(dirname(__DIR__) . '/fixtures/readme-alt1.md');
 
 		$this->assertEquals('6.0', $parser->tested);
 	}
