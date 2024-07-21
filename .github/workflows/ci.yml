@@ -53,7 +53,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        php: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
+        php: ['7.0', '7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        wp: ['5.*', '6.5'] # WordPress 6.6 requires 7.2.
 
     env:
       WP_DB_TEST_NAME: wp_test
@@ -114,6 +115,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          composer require "wp-phpunit/wp-phpunit:${{ matrix.wp }}" "roots/wordpress:${{ matrix.wp }}" --no-interaction --no-update --dev
           composer remove syntatis/coding-standard rector/rector --dev
           composer install --prefer-dist
 
