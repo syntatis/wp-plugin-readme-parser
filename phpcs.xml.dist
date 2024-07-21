@@ -42,6 +42,9 @@
 	<rule ref="Generic.PHP.ForbiddenFunctions">
 	  	<exclude name="Generic.PHP.ForbiddenFunctions.Found"/>
 	</rule>
+	<rule ref="Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence">
+	  	<exclude name="Generic.CodeAnalysis.RequireExplicitBooleanOperatorPrecedence.MissingParentheses"/>
+	</rule>
 	<rule ref="Squiz.NamingConventions.ValidVariableName">
 	  	<exclude name="Squiz.NamingConventions.ValidVariableName.MemberNotCamelCaps"/>
 	  	<exclude name="Squiz.NamingConventions.ValidVariableName.NotCamelCaps"/>
