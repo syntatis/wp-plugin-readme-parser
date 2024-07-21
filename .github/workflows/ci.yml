@@ -115,8 +115,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer remove syntatis/coding-standard rector/rector --dev
           composer require "wp-phpunit/wp-phpunit:${{ matrix.wp }}" "roots/wordpress:${{ matrix.wp }}" --no-interaction --no-update --dev
+          composer remove syntatis/coding-standard rector/rector --dev
           composer install --prefer-dist
 
       - name: Run test
