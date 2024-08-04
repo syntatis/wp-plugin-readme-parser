@@ -213,6 +213,7 @@ class Parser
 
 	/**
 	 * @param string $file_or_url
+	 *
 	 * @return bool
 	 */
 	protected function parse_readme($file_or_url)
@@ -228,6 +229,7 @@ class Parser
 
 	/**
 	 * @param string $contents The contents of the readme to parse.
+	 *
 	 * @return bool
 	 */
 	protected function parse_readme_contents($contents)
@@ -559,6 +561,7 @@ class Parser
 
 	/**
 	 * @param string $contents
+	 *
 	 * @return string
 	 *
 	 * @access protected
@@ -577,6 +580,7 @@ class Parser
 
 	/**
 	 * @param string $line
+	 *
 	 * @return string
 	 *
 	 * @access protected
@@ -590,6 +594,7 @@ class Parser
 	 * @param string $desc
 	 * @param int $length
 	 * @param string $type The type of the length, 'char' or 'words'.
+	 *
 	 * @return string
 	 *
 	 * @access protected
@@ -646,6 +651,7 @@ class Parser
 	 *
 	 * @param string $line The line from the readme to parse.
 	 * @param bool $only_valid Whether to only return a valid known header.
+	 *
 	 * @return false|array
 	 *
 	 * @access protected
@@ -669,6 +675,7 @@ class Parser
 
 	/**
 	 * @param string $text
+	 *
 	 * @return string
 	 *
 	 * @access protected
@@ -715,6 +722,7 @@ class Parser
 
 	/**
 	 * @param string $text
+	 *
 	 * @return string
 	 *
 	 * @access protected
@@ -733,6 +741,7 @@ class Parser
 	 * Sanitize provided contributors to valid WordPress users
 	 *
 	 * @param array $users Array of user_login's or user_nicename's.
+	 *
 	 * @return array Array of user_logins.
 	 */
 	protected function sanitize_contributors($users)
@@ -768,6 +777,7 @@ class Parser
 	 * Sanitize the provided stable tag to something we expect.
 	 *
 	 * @param string $stable_tag the raw Stable Tag line from the readme.
+	 *
 	 * @return string The sanitized $stable_tag.
 	 */
 	protected function sanitize_stable_tag($stable_tag)
@@ -789,6 +799,7 @@ class Parser
 	 * Sanitizes the Requires PHP header to ensure that it's a valid version header.
 	 *
 	 * @param string $version
+	 *
 	 * @return string The sanitized $version
 	 */
 	protected function sanitize_requires_php($version)
@@ -809,6 +820,7 @@ class Parser
 	 * Sanitizes the Tested header to ensure that it's a valid version header.
 	 *
 	 * @param string $version
+	 *
 	 * @return string The sanitized $version
 	 */
 	protected function sanitize_tested_version($version)
@@ -848,6 +860,7 @@ class Parser
 	 * Sanitizes the Requires at least header to ensure that it's a valid version header.
 	 *
 	 * @param string $version
+	 *
 	 * @return string The sanitized $version
 	 */
 	protected function sanitize_requires_version($version)
@@ -890,6 +903,7 @@ class Parser
 	 * We support headings which are either `= Heading`, `# Heading` or `** Heading`.
 	 *
 	 * @param string|array $lines The lines of the section to parse.
+	 *
 	 * @return array
 	 */
 	protected function parse_section($lines)
@@ -955,6 +969,7 @@ class Parser
 
 	/**
 	 * @param string $text
+	 *
 	 * @return string
 	 */
 	protected function parse_markdown($text)
@@ -979,6 +994,7 @@ class Parser
 	 * NOTE: This does not require a SPDX license to be specified, but it should be a valid license nonetheless.
 	 *
 	 * @param string $license The specified license.
+	 *
 	 * @return string|bool True if it looks good, error code on failure.
 	 */
 	public function validate_license($license)
