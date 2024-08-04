@@ -25,6 +25,7 @@ class Markdown extends MarkdownExtra
 {
 	/**
 	 * @param string $text
+	 *
 	 * @return string
 	 */
 	public function transform($text)
@@ -41,6 +42,7 @@ class Markdown extends MarkdownExtra
 
 	/**
 	 * @param string $text
+	 *
 	 * @return string
 	 *
 	 * @access protected
@@ -62,6 +64,7 @@ class Markdown extends MarkdownExtra
 
 	/**
 	 * @param array $matches
+	 *
 	 * @return string
 	 *
 	 * @access protected
@@ -76,6 +79,7 @@ class Markdown extends MarkdownExtra
 
 	/**
 	 * @param array $matches
+	 *
 	 * @return string
 	 *
 	 * @access protected
