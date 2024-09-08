@@ -39,7 +39,7 @@
 		"roots/wordpress": "^6.6",
 		"syntatis/coding-standard": "^1.4",
 		"wp-phpunit/wp-phpunit": "^6.6",
-		"yoast/phpunit-polyfills": "^2.0"
+		"yoast/phpunit-polyfills": "^3.0"
 	},
 	"scripts": {
 		"phpcs:fix": "vendor/bin/phpcbf || true",
