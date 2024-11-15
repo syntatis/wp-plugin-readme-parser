@@ -27,6 +27,7 @@ composer.lock
 artifacts/
 phpunit.xml
 coverage.xml
+.phpunit.result.cache
 
 # Temporary #
 #############
