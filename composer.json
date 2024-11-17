@@ -36,7 +36,7 @@
 		"phpcompatibility/php-compatibility": "^9.3",
 		"phpunit/phpunit": "^6.5 || ^7.5 || ^7.5 || ^9.6 || ^10.5",
 		"rector/rector": "0.17.10",
-		"roots/wordpress": "^6.6",
+		"roots/wordpress": "^6.7",
 		"syntatis/coding-standard": "^1.5",
 		"wp-phpunit/wp-phpunit": "^6.6",
 		"yoast/phpunit-polyfills": "^3.0"
