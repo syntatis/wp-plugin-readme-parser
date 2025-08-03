@@ -1,4 +1,4 @@
-📦 wp-plugin-readme-parser
+# 📦 wp-plugin-readme-parser
 
 [![ci](https://github.com/syntatis/wp-plugin-readme-parser/actions/workflows/ci.yml/badge.svg)](https://github.com/syntatis/wp-plugin-readme-parser/actions/workflows/ci.yml)
 ![Packagist Dependency Version](https://img.shields.io/packagist/dependency-v/syntatis/wp-plugin-readme-parser/php)
