@@ -28,6 +28,7 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    name: Lint
 
     steps:
       - name: Checkout code

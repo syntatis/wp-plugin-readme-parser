@@ -4,6 +4,9 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    labels:
+      - "dependencies"
+      - "chore"
 
   - package-ecosystem: "composer"
     versioning-strategy: increase
@@ -24,5 +27,6 @@ updates:
           - "patch"
     ignore:
       - dependency-name: "phpunit/phpunit"
-      - dependency-name: "michelf/php-markdown"
-      - dependency-name: "rector/rector"
+    labels:
+      - "dependencies"
+      - "chore"
