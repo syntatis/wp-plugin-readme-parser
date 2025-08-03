@@ -32,7 +32,7 @@
 		"michelf/php-markdown": "^2.0"
 	},
 	"require-dev": {
-		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.1",
 		"phpcompatibility/php-compatibility": "^9.3",
 		"phpunit/phpunit": "^6.5 || ^7.5 || ^7.5 || ^9.6 || ^10.5",
 		"rector/rector": "^2.1",
