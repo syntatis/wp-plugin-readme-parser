@@ -760,7 +760,7 @@ class Parser
 
 			// In the event that something invalid is used, we'll ignore it (Example: 'Joe Bloggs (Australian Translation)')
 			if (! $user) {
-				$this->warnings['contributor_ignored'] = $this->warnings['contributor_ignored'] ?? [];
+				$this->warnings['contributor_ignored'] ??= [];
 				$this->warnings['contributor_ignored'][] = $name;
 				unset($users[$i]);
 				continue;
