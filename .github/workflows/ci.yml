@@ -38,7 +38,7 @@ jobs:
         uses: ramsey/composer-install@v3
 
       - name: Lint codes
-        run: composer phpcs
+        run: composer lint
 
   test:
     runs-on: ubuntu-latest
