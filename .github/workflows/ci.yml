@@ -42,6 +42,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    name: Test
     needs: lint
     strategy:
       fail-fast: true
