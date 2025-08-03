@@ -29,17 +29,17 @@
 	},
 	"require": {
 		"php": "^7.4 || ^8.0",
-		"michelf/php-markdown": "^1.0"
+		"michelf/php-markdown": "^2.0"
 	},
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
 		"phpcompatibility/php-compatibility": "^9.3",
 		"phpunit/phpunit": "^6.5 || ^7.5 || ^7.5 || ^9.6 || ^10.5",
-		"rector/rector": "0.17.10",
+		"rector/rector": "^2.1",
 		"roots/wordpress": "^6.7",
 		"syntatis/coding-standard": "^2.0",
 		"wp-phpunit/wp-phpunit": "^6.7",
-		"yoast/phpunit-polyfills": "^3.0"
+		"yoast/phpunit-polyfills": "^4.0"
 	},
 	"scripts": {
 		"format": "vendor/bin/phpcbf || true",
