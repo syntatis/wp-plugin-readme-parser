@@ -28,7 +28,7 @@
 		}
 	},
 	"require": {
-		"php": ">=7.0",
+		"php": "^7.0 || ^8.0",
 		"michelf/php-markdown": "^1.0"
 	},
 	"require-dev": {
@@ -42,22 +42,18 @@
 		"yoast/phpunit-polyfills": "^3.0"
 	},
 	"scripts": {
-		"phpcs:fix": "vendor/bin/phpcbf || true",
-		"phpcs": "vendor/bin/phpcs",
-		"phpunit": "vendor/bin/phpunit",
-		"test": [
-			"@phpcs",
-			"@phpunit"
-		],
+		"format": "vendor/bin/phpcbf || true",
+		"lint": "vendor/bin/phpcs",
+		"test": "vendor/bin/phpunit",
 		"sync-parser-class": [
 			"@php bin/sync-parser-class",
 			"vendor/bin/rector",
-			"@phpcs:fix"
+			"@format"
 		],
 		"sync-markdown-class": [
 			"@php bin/sync-markdown-class",
 			"vendor/bin/rector",
-			"@phpcs:fix"
+			"@format"
 		]
 	},
 	"config": {
