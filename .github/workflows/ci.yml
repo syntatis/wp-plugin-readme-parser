@@ -1,4 +1,4 @@
-name: ci
+name: CI
 
 on:
   workflow_dispatch:
@@ -15,6 +15,10 @@ on:
       - "phpcs.xml.dist"
       - "phpunit.xml.dist"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   WP_DB_TEST_NAME: wp_test
   WP_DB_TEST_PASS: wp_test
@@ -24,117 +28,33 @@ env:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    name: Lint
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get Composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Setup Composer cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: php-7.4-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: php-7.4-composer-
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
-          tools: composer:v2
+          php-version: "7.4"
 
-      - name: Install dependencies
-        run: composer install --prefer-dist
+      - name: Install PHP dependencies
+        uses: ramsey/composer-install@v3
 
       - name: Lint codes
-        run: composer phpcs
-
-  test-70:
-    runs-on: ubuntu-latest
-    if: ${{ success() }}
-    needs: lint
-    strategy:
-      fail-fast: true
-      matrix:
-        php: ['7.0', '7.1']
-        wp: ['5.*', '6.5'] # WordPress 6.6 requires 7.2.
-
-    services:
-      database:
-        image: 'mariadb:10.11.5'
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: ${{ env.WP_DB_TEST_NAME }}
-          MYSQL_USER: ${{ env.WP_DB_TEST_USER }}
-          MYSQL_PASSWORD: ${{ env.WP_DB_TEST_PASS }}
-        ports:
-          - 3306:3306
-        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Setup PHP extensions cache environment
-        id: php-ext-cache
-        uses: shivammathur/cache-extensions@v1
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: ${{ env.PHP_EXTENSIONS }}
-          key: php-${{ matrix.php }}-ext
-
-      - name: Setup PHP extensions cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.php-ext-cache.outputs.dir }}
-          key: ${{ steps.php-ext-cache.outputs.key }}
-          restore-keys: ${{ steps.php-ext-cache.outputs.key }}
-
-      - name: Get Composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Setup Composer cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: php-${{ matrix.php }}-composer-
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: ${{ env.PHP_EXTENSIONS }}
-          tools: composer:v2
-
-      - name: Install dependencies
-        run: |
-          composer require "wp-phpunit/wp-phpunit:${{ matrix.wp }}" "roots/wordpress:${{ matrix.wp }}" --no-interaction --no-update --dev
-          composer remove syntatis/coding-standard rector/rector --dev
-          composer install --prefer-dist
-
-      - name: Run test
-        env:
-          WP_DB_TEST_HOST: 127.0.0.1:${{ job.services.database.ports['3306'] }}
-          WP_ENVIRONMENT_TYPE: development
-        run: |
-          vendor/bin/phpunit
+        run: composer lint
 
   test:
     runs-on: ubuntu-latest
-    if: ${{ success() }}
+    name: Test
     needs: lint
     strategy:
       fail-fast: true
+      max-parallel: 4
       matrix:
-        php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
-        wp: ['5.*', '6.*']
+        php-version: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+        wp-version: ['5.*', '6.*']
 
     services:
       database:
@@ -158,9 +78,9 @@ jobs:
         id: php-ext-cache
         uses: shivammathur/cache-extensions@v1
         with:
-          php-version: ${{ matrix.php }}
+          php-version: ${{ matrix.php-version }}
           extensions: ${{ env.PHP_EXTENSIONS }}
-          key: php-${{ matrix.php }}-ext
+          key: php-${{ matrix.php-version }}-ext
 
       - name: Setup PHP extensions cache
         uses: actions/cache@v4
@@ -169,28 +89,17 @@ jobs:
           key: ${{ steps.php-ext-cache.outputs.key }}
           restore-keys: ${{ steps.php-ext-cache.outputs.key }}
 
-      - name: Get Composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Setup Composer cache
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: php-${{ matrix.php }}-composer-
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: ${{ matrix.php-version }}
           extensions: ${{ env.PHP_EXTENSIONS }}
-          tools: composer:v2
 
-      - name: Install dependencies
-        run: |
-          composer remove syntatis/coding-standard rector/rector --dev
-          composer install --prefer-dist
+      - name: Require PHP dependencies
+        run: composer require "wp-phpunit/wp-phpunit:${{ matrix.wp-version }}" "roots/wordpress:${{ matrix.wp-version }}" --no-interaction --no-update --dev
+
+      - name: Install PHP dependencies
+        uses: ramsey/composer-install@v3
 
       - name: Run test
         env:

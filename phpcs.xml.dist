@@ -90,6 +90,9 @@
 	  	<exclude name="SlevomatCodingStandard.PHP.DisallowReference.DisallowedPassingByReference"/>
 	  	<exclude name="SlevomatCodingStandard.PHP.DisallowReference.DisallowedAssigningByReference"/>
 	</rule>
+	<rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall">
+	  	<exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma"/>
+	</rule>
 
 	<exclude-pattern>/cache/</exclude-pattern>
 	<exclude-pattern>/tests/intelephense-alias.php</exclude-pattern>
