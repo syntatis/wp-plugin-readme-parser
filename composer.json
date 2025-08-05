@@ -9,7 +9,7 @@
     "parser"
 	],
 	"homepage": "https://github.com/syntatis/wp-plugin-readme-parser",
-	"license": "GPL-2.0-or-later",
+	"license": "GPL-3.0",
 	"authors": [
 		{
 			"name": "Thoriq Firdaus",
