@@ -23,7 +23,12 @@ use const HTML_ENTITIES;
  */
 class Markdown extends MarkdownExtra
 {
-	public function transform(string $text): string
+	/**
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public function transform($text)
 	{
 		$text = $this->code_trick(trim($text));
 
@@ -35,7 +40,14 @@ class Markdown extends MarkdownExtra
 		return trim($text);
 	}
 
-	protected function code_trick(string $text): string
+	/**
+	 * @param string $text
+	 *
+	 * @return string
+	 *
+	 * @access protected
+	 */
+	protected function code_trick($text)
 	{
 		/*
 		 * When doing markdown, first take any user formatted code blocks and turn them into backticks so that
@@ -50,7 +62,14 @@ class Markdown extends MarkdownExtra
 		return $text;
 	}
 
-	protected function code_trick_indent_cb(array $matches): string
+	/**
+	 * @param array $matches
+	 *
+	 * @return string
+	 *
+	 * @access protected
+	 */
+	protected function code_trick_indent_cb($matches)
 	{
 		$text = $matches[3];
 		$text = preg_replace('|^|m', $matches[2] . '    ', $text);
@@ -58,7 +77,14 @@ class Markdown extends MarkdownExtra
 		return $matches[1] . $text;
 	}
 
-	protected function code_trick_decodeit_cb(array $matches): string
+	/**
+	 * @param array $matches
+	 *
+	 * @return string
+	 *
+	 * @access protected
+	 */
+	protected function code_trick_decodeit_cb($matches)
 	{
 		$trans_table = array_flip(get_html_translation_table(HTML_ENTITIES));
 
