@@ -246,7 +246,7 @@ class Parser
 
 		// Strip UTF8 BOM if present.
 		if (strpos($contents[0], "\xEF\xBB\xBF") === 0) {
-			$contents[0] = substr($contents[0], 3);
+			$contents[0] = (string) substr($contents[0], 3);
 		}
 
 		// Convert UTF-16 files.
