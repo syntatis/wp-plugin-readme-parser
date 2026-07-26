@@ -32,13 +32,13 @@
 		"michelf/php-markdown": "^2.0"
 	},
 	"require-dev": {
-		"dealerdirect/phpcodesniffer-composer-installer": "^1.1",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.2",
 		"phpcompatibility/php-compatibility": "^9.3",
 		"phpunit/phpunit": "^6.5 || ^7.5 || ^7.5 || ^9.6 || ^10.5",
 		"rector/rector": "^2.1",
 		"roots/wordpress": "^6.8",
 		"syntatis/coding-standard": "^2.0",
-		"wp-phpunit/wp-phpunit": "^6.8",
+		"wp-phpunit/wp-phpunit": "^6.9",
 		"yoast/phpunit-polyfills": "^4.0"
 	},
 	"scripts": {
