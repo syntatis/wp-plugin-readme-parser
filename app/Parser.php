@@ -18,6 +18,7 @@ use function defined;
 use function explode;
 use function file_exists;
 use function file_get_contents;
+use function function_exists;
 use function html_entity_decode;
 use function implode;
 use function in_array;
@@ -218,11 +219,32 @@ class Parser
 	 */
 	protected function parse_readme($file_or_url)
 	{
-		$context = stream_context_create([
-			'http' => ['user_agent' => 'WordPress.org Plugin Readme Parser'],
-		]);
+		$is_http = (bool) preg_match('!^https?://!i', $file_or_url);
 
-		$contents = file_get_contents($file_or_url, false, $context);
+		// Prefer wp_safe_remote_get for HTTP fetches — it has a 5s timeout, so a hung readme host can't stall queue() or the SVN watcher. Fall back to a no-timeout file_get_contents when WP isn't loaded (early bootstrap / standalone CLI) or for non-HTTP sources (local files, data URIs).
+		if ($is_http && function_exists('wp_safe_remote_get')) {
+			$response = wp_safe_remote_get(
+				$file_or_url,
+				['user-agent' => 'WordPress.org Plugin Readme Parser']
+			);
+
+			if (is_wp_error($response) || wp_remote_retrieve_response_code($response) >= 400) {
+				return false;
+			}
+
+			$contents = wp_remote_retrieve_body($response);
+		} else {
+			$context = stream_context_create([
+				'http' => ['user_agent' => 'WordPress.org Plugin Readme Parser'],
+			]);
+
+			// Suppress warnings for the common 404 / unreachable-URL case; downstream callers see an empty parser.
+			$contents = @file_get_contents($file_or_url, false, $context);
+		}
+
+		if (! is_string($contents)) {
+			return false;
+		}
 
 		return $this->parse_readme_contents($contents);
 	}
@@ -234,6 +256,11 @@ class Parser
 	 */
 	protected function parse_readme_contents($contents)
 	{
+		// Belt-and-braces: external callers (or future code paths) shouldn't be able to fatal preg_match by passing a non-string.
+		if (! is_string($contents)) {
+			return false;
+		}
+
 		$this->raw_contents = $contents;
 
 		if (preg_match('!!u', $contents)) {
@@ -246,7 +273,7 @@ class Parser
 
 		// Strip UTF8 BOM if present.
 		if (strpos($contents[0], "\xEF\xBB\xBF") === 0) {
-			$contents[0] = substr($contents[0], 3);
+			$contents[0] = (string) substr($contents[0], 3);
 		}
 
 		// Convert UTF-16 files.
@@ -367,10 +394,10 @@ class Parser
 		}
 
 		if (! empty($headers['license'])) {
-			// Handle the many cases of "License: GPLv2 - http://..."
+			// Handle "License: GPLv2 - http://..." and wrapped forms like "<http://...>" or "(http://...)".
 			if (empty($headers['license_uri']) && preg_match('!(https?://\S+)!i', $headers['license'], $url)) {
-				$headers['license_uri'] = trim($url[1], " -*\t\n\r\n(");
-				$headers['license'] = trim(str_replace($url[1], '', $headers['license']), " -*\t\n\r\n(");
+				$headers['license_uri'] = trim($url[1], " -*\t\n\r\n()<>");
+				$headers['license'] = trim(str_replace($url[1], '', $headers['license']), " -*\t\n\r\n()<>");
 			}
 
 			$this->license = $headers['license'];
@@ -664,7 +691,8 @@ class Parser
 
 		list( $key, $value ) = explode(':', $line, 2);
 		$key = strtolower(trim($key, " \t*-\r\n"));
-		$value = trim($value, " \t*-\r\n");
+		// Strip `<>` so the markdown autolink form `<https://example.com>` resolves like a bare URL.
+		$value = trim($value, " \t*-\r\n<>");
 
 		if ($only_valid && ! isset($this->valid_headers[$key])) {
 			return false;
