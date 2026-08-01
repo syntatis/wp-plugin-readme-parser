@@ -40,7 +40,7 @@ jobs:
           php-version: "7.4"
 
       - name: Install PHP dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
 
       - name: Lint codes
         run: composer lint
@@ -99,7 +99,7 @@ jobs:
         run: composer require "wp-phpunit/wp-phpunit:${{ matrix.wp-version }}" "roots/wordpress:${{ matrix.wp-version }}" --no-interaction --no-update --dev
 
       - name: Install PHP dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
 
       - name: Run test
         env:
