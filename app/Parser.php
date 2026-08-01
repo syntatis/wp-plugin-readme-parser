@@ -400,7 +400,7 @@ class Parser
 				$headers['license'] = trim(str_replace($url[1], '', $headers['license']), " -*\t\n\r\n()<>");
 			}
 
-			$this->license = $headers['license'];
+			$this->license = $this->sanitize_text($headers['license']);
 		}
 
 		if (! empty($headers['license_uri'])) {
