@@ -23,7 +23,12 @@ use const HTML_ENTITIES;
  */
 class Markdown extends MarkdownExtra
 {
-	public function transform(string $text): string
+	/**
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public function transform($text)
 	{
 		$text = $this->code_trick(trim($text));
 
