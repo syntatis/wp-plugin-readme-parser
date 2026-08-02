@@ -27,6 +27,7 @@ updates:
           - "patch"
     ignore:
       - dependency-name: "phpunit/phpunit"
+      - dependency-name: "michelf/php-markdown"
     labels:
       - "dependencies"
       - "chore"
