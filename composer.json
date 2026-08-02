@@ -38,7 +38,7 @@
 		"rector/rector": "^2.3",
 		"roots/wordpress": "^6.9",
 		"syntatis/coding-standard": "^2.0",
-		"wp-phpunit/wp-phpunit": "^6.9",
+		"wp-phpunit/wp-phpunit": "^7.0",
 		"yoast/phpunit-polyfills": "^4.0"
 	},
 	"scripts": {
