@@ -35,7 +35,7 @@
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.2",
 		"phpcompatibility/php-compatibility": "^9.3",
 		"phpunit/phpunit": "^6.5 || ^7.5 || ^7.5 || ^9.6 || ^10.5",
-		"rector/rector": "^2.5",
+		"rector/rector": "^2.6",
 		"roots/wordpress": "^7.0",
 		"syntatis/coding-standard": "^2.1",
 		"wp-phpunit/wp-phpunit": "^7.0",
